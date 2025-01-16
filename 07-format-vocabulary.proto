@@ -1,0 +1,55 @@
+syntax = "proto3";
+
+package vcb.fa;
+
+import "google/protobuf/descriptor.proto";
+
+/**
+* XXX Vocabulary Proto
+* (Version 1.0.0-DRAFT)
+*
+*  The "format" annotation keyword is defined to allow schema authors to convey semantic information for a fixed subset of values which are accurately described by authoritative resources, be they RFCs or other external specifications.
+* 
+* Vocabulary url: 
+* - https://json-schema.org/draft/2020-12/vocab/format-annotation
+*
+* Authors: 
+* - Andrea Gioia
+*
+* LICENCE: 
+* - Apache License Version 2.0 (https://github.com/opendatamesh-initiative/odm-specification-schema-annotations/blob/main/LICENSE)
+*
+**/
+message XXXVocabulary {
+
+  // Keywords applicable to all model elements (starting from xo000)
+  // > add general keywords here. 
+  // > Ex. optional string keyword = 12000;
+
+
+  // Keywords applicable only to schema and objects (starting from x3000)
+  // > add schema and objects specific keywords here. 
+  // > Ex. optional string keyword = 12000 [targets = TARGET_TYPE_FILE, targets = TARGET_TYPE_MESSAGE];
+
+
+  //Keywords applicable only to properties (starting from x6000 )
+  
+  // - Keywords applicable to string properties
+  optional string format = 72000 [targets = TARGET_TYPE_FIELD];
+}
+
+// Custom options to annotate schemas
+extend google.protobuf.FileOptions {
+  XXXVocabulary sk = 79997;
+}
+
+// Custom options to annotate objects
+extend google.protobuf.MessageOptions {
+  XXXVocabulary mk = 79998;
+}
+
+// Custom options to annotate properties
+extend google.protobuf.FieldOptions {
+  XXXVocabulary fk = 79999;
+}
+

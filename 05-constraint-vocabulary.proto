@@ -1,0 +1,80 @@
+syntax = "proto3";
+
+package vcb.ca;
+
+import "google/protobuf/descriptor.proto";
+
+/**
+* Constraint Annotations Vocabulary Proto
+* (Version 1.0.0-DRAFT)
+*
+* The Constraint Annotations Vocabulary, defined as an extension of the SAS, provides commonly used metadata for 
+* annotating schemas at a physical level. Sometime is necessary to enable the consumption of data from the underlying 
+* datastore to expose these information. If this is not the case this information SHOULD not be exposed in order to hide 
+* to the consumer internal implementation details.
+* 
+* Vocabulary url: 
+* - https://dpds.opendatamesh.org/specifications/sas/1.0.0-DRAFT/vocab/constraints/
+*
+* Authors: 
+* - Andrea Gioia
+*
+* LICENCE: 
+* - Apache License Version 2.0 (https://github.com/opendatamesh-initiative/odm-specification-schema-annotations/blob/main/LICENSE)
+*
+**/
+message ConstraintAnnotationsVocabulary {
+
+  // Keywords applicable to all model elements (starting from x0000)
+  // > add general keywords here. 
+  // > Ex. optional string keyword = 60000;
+
+  // Keywords applicable only to schema and objects (starting from x3000)
+  // > add schema and objects specific keywords here. 
+  // > Ex. optional string keyword = 62000 [targets = TARGET_TYPE_FILE, targets = TARGET_TYPE_MESSAGE];
+
+  
+  // Keywords applicable only to properties (starting from x6000 )
+
+  // - Keywords applicable to any properties
+  optional string enum = 56000 [targets = TARGET_TYPE_FIELD];
+  optional string const = 56001 [targets = TARGET_TYPE_FIELD];
+
+  // - Keywords applicable to numeric properties
+  optional int32 multipleOf = 56200 [targets = TARGET_TYPE_FIELD];
+  optional int32 maximum = 56201 [targets = TARGET_TYPE_FIELD];
+  optional int32 exclusiveMaximum = 56202 [targets = TARGET_TYPE_FIELD];
+  optional int32 minimum = 56203 [targets = TARGET_TYPE_FIELD];
+  optional int32 exclusiveMinimum = 56204 [targets = TARGET_TYPE_FIELD];
+
+  // - Keywords applicable to string properties
+  optional int32 maxLength = 56400 [targets = TARGET_TYPE_FIELD];
+  optional int32 minLength = 56401 [targets = TARGET_TYPE_FIELD];
+  optional string pattern = 56402 [targets = TARGET_TYPE_FIELD];
+
+  // - Keywords applicable to array properties
+  optional int32 maxItems = 56600 [targets = TARGET_TYPE_FIELD];
+  optional int32 minItems = 56601 [targets = TARGET_TYPE_FIELD];
+
+   // - Keywords applicable to object properties 
+   optional int32 maxProperties = 56800 [targets = TARGET_TYPE_FIELD];
+   optional int32 maximinPropertiesmum = 56801 [targets = TARGET_TYPE_FIELD];
+   optional string required = 56802 [targets = TARGET_TYPE_FIELD];
+   optional string dependentRequired = 56803 [targets = TARGET_TYPE_FIELD];
+}
+
+// Custom options to annotate schemas
+extend google.protobuf.FileOptions {
+  ConstraintAnnotationsVocabulary sk = 59997;
+}
+
+// Custom options to annotate objects
+extend google.protobuf.MessageOptions {
+  ConstraintAnnotationsVocabulary mk = 59998;
+}
+
+// Custom options to annotate properties
+extend google.protobuf.FieldOptions {
+  ConstraintAnnotationsVocabulary fk = 59999;
+}
+

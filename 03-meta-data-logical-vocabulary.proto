@@ -1,0 +1,71 @@
+syntax = "proto3";
+
+package vcb.lmd;
+
+import "google/protobuf/descriptor.proto";
+
+/**
+* Logical Meta-Data Annotations Vocabulary
+* (Version 1.0.0-DRAFT)
+*
+* The Logical Meta-Data Annotations Vocabulary, defined as an extension of the SAS, provides commonly used metadata 
+* for annotating schemas at a logical level. The keywords in this vocabulary do not include, and will not include in the future, 
+* any information about the underlying datastore or details for schema or data validation.
+* 
+* Vocabulary url: 
+* - https://dpds.opendatamesh.org/specifications/sas/1.0.0-DRAFT/vocab/meta-data-logical
+*
+* Authors: 
+* - Andrea Gioia
+*
+* LICENCE: 
+* - Apache License Version 2.0 (https://github.com/opendatamesh-initiative/odm-specification-schema-annotations/blob/main/LICENSE)
+*
+**/
+message LogicalMetadataVocabulary {
+
+  // Keywords applicable to all model elements (starting from x0000)
+  optional string summary = 30001;
+  optional string modelRole = 30002;
+  optional string tags = 30003;
+  optional string externalDocs = 30004;
+
+
+  // Keywords applicable only to schema and objects (starting from x3000)
+  optional string owner = 33000 [targets = TARGET_TYPE_MESSAGE];
+  optional string domain = 33001  [targets = TARGET_TYPE_MESSAGE];
+  optional string schemaType = 33002  [targets = TARGET_TYPE_MESSAGE];
+  optional string modellingStyle = 33003  [targets = TARGET_TYPE_MESSAGE];
+  optional string contactPoints = 33004  [targets = TARGET_TYPE_MESSAGE];
+  optional string status = 33005  [targets = TARGET_TYPE_MESSAGE];
+
+
+  //Keywords applicable only to properties (starting from x6000)
+  optional string primaryKey = 36000  [targets = TARGET_TYPE_FIELD];
+  optional string primaryKeyPosition = 36001  [targets = TARGET_TYPE_FIELD];
+  optional bool unique = 36002  [targets = TARGET_TYPE_FIELD];
+  optional bool nullable = 36003  [targets = TARGET_TYPE_FIELD];
+  optional string nullValuesEnum = 36004  [targets = TARGET_TYPE_FIELD];
+  optional string nullValuesPattern = 36005  [targets = TARGET_TYPE_FIELD];
+  optional bool validityTime = 36006  [targets = TARGET_TYPE_FIELD];
+  optional bool creationTime = 36007  [targets = TARGET_TYPE_FIELD];
+  optional bool lastUpdateTime = 36008  [targets = TARGET_TYPE_FIELD];
+  optional bool deletionTime = 36009  [targets = TARGET_TYPE_FIELD];
+  optional bool sequenceKey = 360010  [targets = TARGET_TYPE_FIELD];
+  optional bool watermarkKey = 36011  [targets = TARGET_TYPE_FIELD];
+}
+
+// Custom options to annotate schemas
+extend google.protobuf.FileOptions {
+  LogicalMetadataVocabulary sk = 39997;
+}
+
+// Custom options to annotate objects
+extend google.protobuf.MessageOptions {
+  LogicalMetadataVocabulary mk = 39998;
+}
+
+// Custom options to annotate properties
+extend google.protobuf.FieldOptions {
+  LogicalMetadataVocabulary fk = 39999;
+}

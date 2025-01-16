@@ -1,0 +1,57 @@
+syntax = "proto3";
+
+package vcb.pmd;
+
+import "google/protobuf/descriptor.proto";
+
+/**
+* Physical Meta-Data Annotations Vocabulary
+* (Version 1.0.0-DRAFT)
+* 
+* The Physical Metadata Annotation Vocabulary, defined as an extension of the SAS, provides commonly used metadata for 
+* annotating schemas at a physical level. Sometime is necessary to enable the consumption of data from the underlying 
+* datastore to expose these information. If this is not the case this information SHOULD not be exposed in order to hide 
+* to the consumer internal implementation details
+*
+* Vocabulary url: 
+* - https://dpds.opendatamesh.org/specifications/sas/1.0.0-DRAFT/vocab/meta-data-physical
+*
+* Authors: 
+* - Andrea Gioia
+*
+* LICENCE: 
+* - Apache License Version 2.0 (https://github.com/opendatamesh-initiative/odm-specification-schema-annotations/blob/main/LICENSE)
+*
+**/
+message PhysicalMetadataVocabulary {
+
+  // Keywords applicable to all model elements (starting from x0000)
+  optional string physicalName = 40000;
+  optional string physicalType = 40001;
+
+  // Keywords applicable only to schema and objects (starting from x3000)
+  // add schema and objects specific keywords here. 
+  // Ex. optional string keyword = 12000 [targets = TARGET_TYPE_FILE, targets = TARGET_TYPE_MESSAGE];
+
+  
+  //Keywords applicable only to properties (starting from x6000 )
+  // add properties specific keywords here 
+  optional bool partitionKey = 46000 [targets = TARGET_TYPE_FIELD];
+  optional int32  partitionKeyPosition = 46001 [targets = TARGET_TYPE_FIELD];
+}
+
+// Custom options to annotate schemas
+extend google.protobuf.FileOptions {
+  PhysicalMetadataVocabulary sk = 49997;
+}
+
+// Custom options to annotate objects
+extend google.protobuf.MessageOptions {
+  PhysicalMetadataVocabulary mk = 49998;
+}
+
+// Custom options to annotate properties
+extend google.protobuf.FieldOptions {
+  PhysicalMetadataVocabulary fk = 49999;
+}
+

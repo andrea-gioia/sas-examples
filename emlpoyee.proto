@@ -1,0 +1,56 @@
+syntax = "proto3";
+
+package it.quantyca.protobuf;
+
+import "google/protobuf/descriptor.proto";
+
+import "metadata-vocabulary.proto";
+import "logical-metadata-vocabulary.proto";
+
+option java_outer_classname = "EmployeeProtos";
+
+// CoreMetadata is the set of attribute apply to both the Message & Field
+message CoreMetadata {
+  optional string comment = 10001;
+}
+
+// Custom options to annotate Protobuf messages
+extend google.protobuf.MessageOptions {
+  // message.description is a Mandatory Metadata
+  CoreMetadata message_core = 11001;
+  string summary = 11002;
+}
+
+// Custom options to annotate Protobuf messages
+extend google.protobuf.FieldOptions {
+  // message.description is a Mandatory Metadata
+  CoreMetadata field_core = 12001;
+}
+
+
+// Employee's data
+message Employee {
+  option (vcb.mdl.mk).owner = "Andrea";
+  option (vcb.md.mk).description = "Employee's data";
+  option (summary) = "Key data about the employee";
+  option (message_core).comment = "todo";
+  
+
+  int32 id = 1 [
+    (vcb.md.fk).title = "Identifier", 
+    (vcb.mdl.fk).nullable = true
+  ]; // Identifier
+
+  string name = 2 [
+    (vcb.md.fk).title = "Name"
+  ]; // Name
+
+  string department = 3 [
+    (vcb.md.fk).title =  "Department"
+  ]; // Department
+
+  double salary = 4 [
+    (vcb.md.fk).title = "Salary",
+    (field_core).comment = "todo"
+  ]; // Salary
+}

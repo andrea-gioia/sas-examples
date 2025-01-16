@@ -1,0 +1,54 @@
+syntax = "proto3";
+
+package vcb.xxx;
+
+import "google/protobuf/descriptor.proto";
+
+/**
+* XXX Vocabulary Proto
+* (Version 1.0.0-DRAFT)
+*
+* [DESCRIPTION GOES HERE]
+* 
+* Vocabulary url: 
+* - https://dpds.opendatamesh.org/specifications/sas/1.0.0-DRAFT/vocab/xxx/
+*
+* Authors: 
+* - Andrea Gioia
+*
+* LICENCE: 
+* - Apache License Version 2.0 (https://github.com/opendatamesh-initiative/odm-specification-schema-annotations/blob/main/LICENSE)
+*
+**/
+message XXXVocabulary {
+
+  // Keywords applicable to all model elements (starting from xo000)
+  // > add general keywords here. 
+  // > Ex. optional string keyword = 12000;
+
+
+  // Keywords applicable only to schema and objects (starting from x3000)
+  // > add schema and objects specific keywords here. 
+  // > Ex. optional string keyword = 12000 [targets = TARGET_TYPE_FILE, targets = TARGET_TYPE_MESSAGE];
+
+
+  //Keywords applicable only to properties (starting from x6000 )
+  // add properties specific keywords here 
+  // > Ex. optional string keyword = 12000[targets = TARGET_TYPE_FIELD];
+}
+
+// Custom options to annotate schemas
+extend google.protobuf.FileOptions {
+  XXXVocabulary sk = 19997;
+}
+
+// Custom options to annotate objects
+extend google.protobuf.MessageOptions {
+  XXXVocabulary mk = 19998;
+}
+
+// Custom options to annotate properties
+extend google.protobuf.FieldOptions {
+  XXXVocabulary fk = 19999;
+}
+

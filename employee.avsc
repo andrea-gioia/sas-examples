@@ -1,0 +1,28 @@
+{
+  "type": "record",
+  "name": "Employee",
+  "namespace": "it.quantyca",
+  "description": "Employee's data",
+  "fields": [
+    {
+      "name": "id",
+      "type": "int",
+      "title": "Identifier"
+    },
+    {
+      "name": "name",
+      "type": "string",
+      "title": "Name"
+    },
+    {
+      "name": "department",
+      "type": "string",
+      "title": "Department"
+    },
+    {
+      "name": "salary",
+      "type": "double",
+      "title": "Salary"
+    }
+  ]
+}

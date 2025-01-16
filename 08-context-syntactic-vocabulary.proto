@@ -1,0 +1,54 @@
+syntax = "proto3";
+
+package vcb.syn;
+
+import "google/protobuf/descriptor.proto";
+
+/**
+* Syntactic Context Annotations Vocabulary Proto
+* (Version 1.0.0-DRAFT)
+*
+* The Syntactic Context Annotations Vocabulary, defined as an extension of the SAS, provides commonly used metadata to 
+* syntactly contextualize schema element.
+* 
+* Vocabulary url: 
+* - https://dpds.opendatamesh.org/specifications/sas/1.0.0-DRAFT/vocab/context-syntactic
+*
+* Authors: 
+* - Andrea Gioia
+*
+* LICENCE: 
+* - Apache License Version 2.0 (https://github.com/opendatamesh-initiative/odm-specification-schema-annotations/blob/main/LICENSE)
+*
+**/
+message SyntacticContextVocabulary {
+
+  // Keywords applicable to all model elements (starting from xo000)
+  // > add general keywords here. 
+  // > Ex. optional string keyword = 12000;
+
+
+  // Keywords applicable only to schema and objects (starting from x3000)
+  // > add schema and objects specific keywords here. 
+  // > Ex. optional string keyword = 12000 [targets = TARGET_TYPE_FILE, targets = TARGET_TYPE_MESSAGE];
+
+
+  //Keywords applicable only to properties (starting from x6000 )
+  optional string conformsTo = 86000[targets = TARGET_TYPE_FIELD];
+}
+
+// Custom options to annotate schemas
+extend google.protobuf.FileOptions {
+  SyntacticContextVocabulary sk = 89997;
+}
+
+// Custom options to annotate objects
+extend google.protobuf.MessageOptions {
+  SyntacticContextVocabulary mk = 89998;
+}
+
+// Custom options to annotate properties
+extend google.protobuf.FieldOptions {
+  SyntacticContextVocabulary fk = 89999;
+}
+

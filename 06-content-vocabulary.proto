@@ -1,0 +1,59 @@
+syntax = "proto3";
+
+package vcb.sec;
+
+import "google/protobuf/descriptor.proto";
+
+/**
+* String-encoded Content Vocabulary Proto
+* (Version 1.0.0-DRAFT)
+*
+* This vocabulary defided in JSON Schema Validation extension describe the format keyword defined to allow schema authors 
+* to convey syntactic information for a fixed subset of values which are accurately described by authoritative resources, be 
+* they RFCs or other external specifications
+* 
+* Vocabulary url: 
+* -https://json-schema.org/draft/2020-12/meta/format-annotation
+* 
+* Authors: 
+* - Andrea Gioia
+*
+* LICENCE: 
+* - Apache License Version 2.0 (https://github.com/opendatamesh-initiative/odm-specification-schema-annotations/blob/main/LICENSE)
+*
+**/
+message ContentVocabulary {
+
+  // Keywords applicable to all model elements (starting from xo000)
+  // > add general keywords here. 
+  // > Ex. optional string keyword = 12000;
+
+
+  // Keywords applicable only to schema and objects (starting from x3000)
+  // > add schema and objects specific keywords here. 
+  // > Ex. optional string keyword = 12000 [targets = TARGET_TYPE_FILE, targets = TARGET_TYPE_MESSAGE];
+
+
+  //Keywords applicable only to properties (starting from x6000)
+
+   // - Keywords applicable to string properties
+  optional string contentEncoding = 62000 [targets = TARGET_TYPE_FIELD];
+  optional string contentMediaType = 62001 [targets = TARGET_TYPE_FIELD];
+  optional string contentSchema = 62002 [targets = TARGET_TYPE_FIELD];
+}
+
+// Custom options to annotate schemas
+extend google.protobuf.FileOptions {
+  ContentVocabulary sk = 69997;
+}
+
+// Custom options to annotate objects
+extend google.protobuf.MessageOptions {
+  ContentVocabulary mk = 69998;
+}
+
+// Custom options to annotate properties
+extend google.protobuf.FieldOptions {
+  ContentVocabulary fk = 69999;
+}
+

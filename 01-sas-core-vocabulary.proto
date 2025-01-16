@@ -1,0 +1,51 @@
+syntax = "proto3";
+
+package vcb.sas;
+
+import "google/protobuf/descriptor.proto";
+
+/**
+* SAS Core Vocabulary Proto
+* (Version 1.0.0-DRAFT)
+*
+* [DESCRIPTION GOES HERE]
+* 
+* Vocabulary url: 
+* - https://dpds.opendatamesh.org/specifications/sas/1.0.0-DRAFT/vocab/core/
+*
+* Authors: 
+* - Andrea Gioia
+*
+* LICENCE: 
+* - Apache License Version 2.0 (https://github.com/opendatamesh-initiative/odm-specification-schema-annotations/blob/main/LICENSE)
+*
+**/
+
+message SasCoreVocabulary {
+
+  // Keywords applicable to all model elements (starting from x2000)
+
+  // Keywords applicable only to schema and objects (starting from x2300)
+  optional string sas = 10001 [targets = TARGET_TYPE_FILE];
+  optional string sasDialect = 10002 [targets = TARGET_TYPE_FILE];
+  optional string sasSchemaId = 10003 [targets = TARGET_TYPE_FILE];
+
+  //Keywords applicable only to properties (starting from x6000 )
+  // addobject key here...  [targets = TARGET_TYPE_FILE] 
+}
+
+// Custom options to annotate schemas
+extend google.protobuf.FileOptions {
+  SasCoreVocabulary sk = 19997;
+}
+
+// Custom options to annotate objects
+extend google.protobuf.MessageOptions {
+  SasCoreVocabulary mk = 19998;
+}
+
+// Custom options to annotate properties
+extend google.protobuf.FieldOptions {
+  SasCoreVocabulary fk = 19999;
+}
+

@@ -1,0 +1,53 @@
+syntax = "proto3";
+
+package vcb.bmd;
+
+import "google/protobuf/descriptor.proto";
+
+/**
+* Basic Meta-Data Annotations Vocabulary Proto
+* (Version 1.0.0-DRAFT)
+*
+* These general-purpose annotation vocabulary defided in JSON Schema Validation extension provide commonly used information 
+* for documentation and user interface display purposes. They are not intended to form a comprehensive set of features. 
+* Rather, additional vocabularies can be defined for more complex annotation-based applications.
+* 
+* Vocabulary url: 
+* - https://json-schema.org/draft/2020-12/meta/meta-data
+*
+* Authors: 
+* - Andrea Gioia
+*
+* LICENCE: 
+* - Apache License Version 2.0 (https://github.com/opendatamesh-initiative/odm-specification-schema-annotations/blob/main/LICENSE)
+*
+**/
+message MetadataVocabulary {
+
+  // Keywords applicable to schema or properties
+  optional string title = 20001;
+  optional string description = 20002;
+  optional string default = 20003;
+  optional bool deprecated = 20004;
+
+  // Keywords applicable only to properties
+  optional bool writeOnly = 25001 [targets = TARGET_TYPE_FIELD];
+  optional bool readOnly = 25002 [targets = TARGET_TYPE_FIELD];
+
+}
+
+// Custom options to annotate schemas
+extend google.protobuf.FileOptions {
+  MetadataVocabulary sk = 29997;
+}
+
+// Custom options to annotate objects
+extend google.protobuf.MessageOptions {
+  MetadataVocabulary mk = 29998;
+}
+
+// Custom options to annotate properties
+extend google.protobuf.FieldOptions {
+  MetadataVocabulary fk = 29999;
+}
+
