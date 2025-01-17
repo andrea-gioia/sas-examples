@@ -36,16 +36,16 @@ message SasCoreVocabulary {
 
 // Custom options to annotate schemas
 extend google.protobuf.FileOptions {
-  SasCoreVocabulary sk = 19997;
+  SasCoreVocabulary sk = 18997;
 }
 
 // Custom options to annotate objects
 extend google.protobuf.MessageOptions {
-  SasCoreVocabulary mk = 19998;
+  SasCoreVocabulary mk = 18998;
 }
 
 // Custom options to annotate properties
 extend google.protobuf.FieldOptions {
-  SasCoreVocabulary fk = 19999;
+  SasCoreVocabulary fk = 18999;
 }
 

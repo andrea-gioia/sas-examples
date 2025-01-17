@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package vcb.lmd;
+package vcb.mdl;
 
 import "google/protobuf/descriptor.proto";
 
@@ -63,6 +63,7 @@ extend google.protobuf.FileOptions {
 // Custom options to annotate objects
 extend google.protobuf.MessageOptions {
   LogicalMetadataVocabulary mk = 39998;
+  optional string testMessageKeyword = 36012;
 }
 
 // Custom options to annotate properties

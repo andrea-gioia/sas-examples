@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package vcb.pmd;
+package vcb.mdp;
 
 import "google/protobuf/descriptor.proto";
 

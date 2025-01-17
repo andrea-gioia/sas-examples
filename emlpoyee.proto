@@ -4,53 +4,46 @@ package it.quantyca.protobuf;
 
 import "google/protobuf/descriptor.proto";
 
-import "metadata-vocabulary.proto";
-import "logical-metadata-vocabulary.proto";
+import "v02-meta-data-basic-vocabulary.proto";
+import "v03-meta-data-logical-vocabulary.proto";
 
 option java_outer_classname = "EmployeeProtos";
 
-// CoreMetadata is the set of attribute apply to both the Message & Field
-message CoreMetadata {
-  optional string comment = 10001;
+extend google.protobuf.FileOptions {
+  optional string testFileKeyword = 136001;
 }
 
-// Custom options to annotate Protobuf messages
 extend google.protobuf.MessageOptions {
-  // message.description is a Mandatory Metadata
-  CoreMetadata message_core = 11001;
-  string summary = 11002;
+  optional string messageFileKeyword = 136002;
 }
 
-// Custom options to annotate Protobuf messages
-extend google.protobuf.FieldOptions {
-  // message.description is a Mandatory Metadata
-  CoreMetadata field_core = 12001;
-}
+option (testFileKeyword) = "testFileKeyword value";
+option (vcb.mdl.sk).summary = "Employ protos";
 
 
 // Employee's data
 message Employee {
+ 
+  option (vcb.mdb.mk).title = "Employee's data";
+  option (vcb.mdl.mk).summary = "Key data about the employee";
   option (vcb.mdl.mk).owner = "Andrea";
-  option (vcb.md.mk).description = "Employee's data";
-  option (summary) = "Key data about the employee";
-  option (message_core).comment = "todo";
-  
+  option (vcb.mdl.testMessageKeyword) = "vcb.mdl.testMessageKeyword value";
+  option (messageFileKeyword) = "messageFileKeyword value";
 
   int32 id = 1 [
-    (vcb.md.fk).title = "Identifier", 
+    (vcb.mdb.fk).title = "Identifier", 
     (vcb.mdl.fk).nullable = true
   ]; // Identifier
 
   string name = 2 [
-    (vcb.md.fk).title = "Name"
+    (vcb.mdb.fk).title = "Name"
   ]; // Name
 
   string department = 3 [
-    (vcb.md.fk).title =  "Department"
+    (vcb.mdb.fk).title =  "Department"
   ]; // Department
 
   double salary = 4 [
-    (vcb.md.fk).title = "Salary",
-    (field_core).comment = "todo"
+    (vcb.mdb.fk).title = "Salary"
   ]; // Salary
 }
